@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 namespace Domain.Material
 {
     /// <summary>
@@ -30,9 +32,11 @@ namespace Domain.Material
 
         public bool IsOverWidthAndPattern(TypeAndSize ptnAndWidth)
         {
-            var materials = repository.Find(ptnAndWidth);
+            var materials = repository.Find(MaterialType.B);
 
-            return materials.Count >= 2;
+            var count = materials.Count(x => x.TypeAndSize.Equals(ptnAndWidth));
+
+            return count >= 2;
         }
 
     }

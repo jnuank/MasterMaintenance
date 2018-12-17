@@ -7,13 +7,16 @@ namespace Domain.Material
     public class Material
     {
         public MaterialId Id { get; private set; }
+        public MaterialName Name { get; private set; }
         public MaterialType Type { get; private set; }
         public TypeAndSize TypeAndSize { get; private set; }
         public Consumption Consumption { get; private set; }
         public Length Length { get; private set; }
         public Weight Weight { get; private set; }
 
+        // コンストラクタはprivateにしておき、外部からインスタンス化させない
         private Material(MaterialId id,
+                        MaterialName name,
                         MaterialType type,
                         TypeAndSize typesize,
                         Consumption consumption,
@@ -21,11 +24,13 @@ namespace Domain.Material
                         Weight weight)
         {
             if (id == null) throw new ArgumentNullException(nameof(MaterialId));
+            if (name == null) throw new ArgumentNullException(nameof(MaterialName));
             if (type == null) throw new ArgumentNullException(nameof(MaterialType));
             if (length == null) throw new ArgumentNullException(nameof(Length));
             if (weight == null) throw new ArgumentNullException(nameof(Weight));
 
             this.Id = id;
+            this.Name = name;
             this.Type = type;
             this.TypeAndSize = typesize;
             this.Consumption = consumption;
@@ -33,15 +38,19 @@ namespace Domain.Material
             this.Weight = weight;
         }
 
+        // 部材Aを生成する
         public static Material CreateMaterialA(MaterialId id,
+                                               MaterialName name,
                                                Consumption consumption,
                                                Weight weight,
                                                Length length)
         {
-            return new Material(id, MaterialType.A, null, null, length, weight);
+            return new Material(id, name, MaterialType.A, null, null, length, weight);
         }
 
+        // 部材Bを生成する
         public static Material CreateMaterialB(MaterialId id,
+                                               MaterialName name,
                                                TypeAndSize typesize,
                                                Weight weight,
                                                Length length,
@@ -49,10 +58,10 @@ namespace Domain.Material
         {
             if(typesize == null) throw new ArgumentNullException(nameof(Domain.Material.TypeAndSize));
 
-            return new Material(id, MaterialType.B, typesize, consumption, length, weight);
+            return new Material(id, name, MaterialType.B, typesize, consumption, length, weight);
         }
 
-        public void ChangePattern(ProductType type)
+        public void ChangeType(ProductType type)
         {
             this.TypeAndSize = new TypeAndSize(type, this.TypeAndSize.Width);
         }

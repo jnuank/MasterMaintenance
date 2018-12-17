@@ -11,16 +11,57 @@ namespace Test
     {
         IMaterialRepository repository = new InMemoryMaterialRepository();
 
+        [SetUp()]
+        public void Setup()
+        {
+            var app = new MaterialApplicationService(repository);
+
+            var id = new MaterialId("12345678");
+            var name = new MaterialName("mat1");
+            var consumption = new Consumption(55.591f);
+            var weight = new Weight(30.0f);
+            var length = new Length(40.1f);
+            var material = Material.CreateMaterialA(id, name, consumption, weight, length);
+
+            app.Save(material);
+
+
+            var id2 = new MaterialId("00001111");
+            var name2 = new MaterialName("mate2");
+            var consumption2 = new Consumption(10.1f);
+            var weight2 = new Weight(11.2f);
+            var length2 = new Length(59.9f);
+            var material2 = Material.CreateMaterialA(id2, name2, consumption2, weight2, length2);
+
+            app.Save(material2);
+
+
+            var id3 = new MaterialId("11112222");
+            var name3 = new MaterialName("mate3");
+            var pattern3 = new ProductType("M040");
+            var width3 = new Size(23.92f);
+
+            var ptnAndWidth3 = new TypeAndSize(pattern3, width3);
+
+            var weight3 = new Weight(20.2f);
+            var length3 = new Length(9.2f);
+            var material3 = Material.CreateMaterialB(id3, name3, ptnAndWidth3, weight3, length3);
+
+            app.Save(material3);
+
+        }
+
         [Test()]
         public void 部材を登録する()
         {
             var app = new MaterialApplicationService(repository);
 
-            var id = new MaterialId("12345678");
+            var id = new MaterialId("19878768");
+            var name = new MaterialName("mat1");
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = Material.CreateMaterialA(id, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, name, consumption, weight, length);
 
             app.Save(material);
 
@@ -31,32 +72,6 @@ namespace Test
         public void 部材区分Aをすべて取得する()
         {
             var app = new MaterialApplicationService(repository);
-
-            var id = new MaterialId("12345678");
-            var consumption = new Consumption(55.591f);
-            var weight = new Weight(30.0f);
-            var length = new Length(40.1f);
-            var material = Material.CreateMaterialA(id, consumption, weight, length);
-
-            var id2 = new MaterialId("00001111");
-            var consumption2 = new Consumption(10.1f);
-            var weight2 = new Weight(11.2f);
-            var length2 = new Length(59.9f);
-            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
-
-            var id3 = new MaterialId("11112222");
-            var pattern3 = new ProductType("M000");
-            var width3 = new Size(23.92f);
-
-            var ptnAndWidth3 = new TypeAndSize(pattern3, width3);
-
-            var weight3 = new Weight(20.2f);
-            var length3 = new Length(9.2f);
-            var material3 = Material.CreateMaterialB(id3, ptnAndWidth3, weight3, length3);
-
-            app.Save(material);
-            app.Save(material2);
-            app.Save(material3);
 
             List<Material> result = app.FindTypeA();
 
@@ -70,29 +85,7 @@ namespace Test
         {
             var app = new MaterialApplicationService(repository);
 
-            var id = new MaterialId("12345678");
-            var consumption = new Consumption(55.591f);
-            var weight = new Weight(30.0f);
-            var length = new Length(40.1f);
-            var material = Material.CreateMaterialA(id, consumption, weight, length);
 
-            var id2 = new MaterialId("00001111");
-            var consumption2 = new Consumption(10.1f);
-            var weight2 = new Weight(11.2f);
-            var length2 = new Length(59.9f);
-            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
-
-            var id3 = new MaterialId("11112222");
-            var pattern3 = new ProductType("M000");
-            var width3 = new Size(23.92f);
-            var ptnWidth3 = new TypeAndSize(pattern3, width3);
-            var weight3 = new Weight(20.2f);
-            var length3 = new Length(9.2f);
-            var material3 = Material.CreateMaterialB(id3, ptnWidth3, weight3, length3);
-
-            app.Save(material);
-            app.Save(material2);
-            app.Save(material3);
 
             List<Material> result = app.FindTypeB();
 
@@ -141,16 +134,18 @@ namespace Test
             var app = new MaterialApplicationService(repository);
 
             var id = new MaterialId("12345678");
+            var name = new MaterialName("m1");
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = Material.CreateMaterialA(id, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, name, consumption, weight, length);
 
             var id2 = new MaterialId("12345678");
+            var name2 = new MaterialName("m2");
             var consumption2 = new Consumption(10.1f);
             var weight2 = new Weight(11.2f);
             var length2 = new Length(59.9f);
-            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
+            var material2 = Material.CreateMaterialA(id2, name2, consumption2, weight2, length2);
 
             app.Save(material);
 
@@ -167,16 +162,18 @@ namespace Test
             var app = new MaterialApplicationService(repository);
 
             var id = new MaterialId("01010101");
+            var name = new MaterialName("m1");
             var ptnWidth = new TypeAndSize(new ProductType("M000"), new Size(23.92f));
             var weight = new Weight(20.2f);
             var length = new Length(9.2f);
-            var material = Material.CreateMaterialB(id, ptnWidth, weight, length);
+            var material = Material.CreateMaterialB(id, name, ptnWidth, weight, length);
 
             var id2 = new MaterialId("25478900");
+            var name2 = new MaterialName("m2");
             var ptnWidth2 = new TypeAndSize(new ProductType("M000"), new Size(23.92f));
             var weight2 = new Weight(12.2f);
             var length2 = new Length(8.2f);
-            var material2 = Material.CreateMaterialB(id2, ptnWidth2, weight2, length2);
+            var material2 = Material.CreateMaterialB(id2, name2, ptnWidth2, weight2, length2);
 
             app.Save(material);
             app.Save(material2);
@@ -195,21 +192,6 @@ namespace Test
             var app = new MaterialApplicationService(repository);
             var service = new MaterialService(repository);
 
-            var id = new MaterialId("12345678");
-            var consumption = new Consumption(55.591f);
-            var weight = new Weight(30.0f);
-            var length = new Length(40.1f);
-            var material = Material.CreateMaterialA(id, consumption, weight, length);
-
-            var id2 = new MaterialId("00001111");
-            var consumption2 = new Consumption(10.1f);
-            var weight2 = new Weight(11.2f);
-            var length2 = new Length(59.9f);
-            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
-
-            app.Save(material);
-            app.Save(material2);
-            
 
             bool result = service.IsOverMaterialA();
 
