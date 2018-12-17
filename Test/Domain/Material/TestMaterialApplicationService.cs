@@ -20,7 +20,7 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, consumption, weight, length);
 
             app.Save(material);
 

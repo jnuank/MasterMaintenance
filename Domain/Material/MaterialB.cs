@@ -12,10 +12,5 @@ namespace Domain.Material
         {
 
         }
-
-        public override Material ChangeType(MaterialType type)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

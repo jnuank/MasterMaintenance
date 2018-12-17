@@ -4,7 +4,7 @@ namespace Domain.Material
     /// <summary>
     /// 部材クラス
     /// </summary>
-    public abstract class Material
+    public class Material
     {
         public MaterialId Id { get; protected set; }
         public MaterialType Type { get; protected set; }
@@ -28,9 +28,14 @@ namespace Domain.Material
             this.Weight = weight;
         }
 
-        public static Material CreateMaterialA()
+        public static Material CreateMaterialA(MaterialId id,
+                                               Consumption consumption,
+                                               Weight weight,
+                                               Length length)
+        {
+            return new Material(id, MaterialType.A, null, consumption, length, weight);
+        }
 
-        
         public void ChangePattern(TreadPattern pattern)
         {
             this.PatternAndWidth = new TreadPatternAndWidth(pattern, this.PatternAndWidth.Width);

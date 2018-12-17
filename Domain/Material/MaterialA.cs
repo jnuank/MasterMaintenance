@@ -12,17 +12,5 @@ namespace Domain.Material
         {
             
         }
-
-        public override Material ChangeType(MaterialType type)
-        {
-            if(type == MaterialType.B)
-            {
-            }
-
-            return null;
-        }
-
-
-
     }
 }
