@@ -28,8 +28,9 @@ namespace Domain.Material
             this.Weight = weight;
         }
 
-        public abstract Material ChangeType(MaterialType type);
+        public static Material CreateMaterialA()
 
+        
         public void ChangePattern(TreadPattern pattern)
         {
             this.PatternAndWidth = new TreadPatternAndWidth(pattern, this.PatternAndWidth.Width);
