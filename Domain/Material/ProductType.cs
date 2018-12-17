@@ -7,30 +7,30 @@ namespace Domain.Material
     /// <summary>
     /// トレッドパターンオブジェクト
     /// </summary>
-    public class TreadPattern
+    public class ProductType
     {
         public string Value { get; }
 
-        public TreadPattern(string patternName)
+        public ProductType(string TypeName)
         {
-            if(string.IsNullOrEmpty(patternName))
+            if(string.IsNullOrEmpty(TypeName))
             {
                 throw new ArgumentException("空白を入れることはできません");
             }
 
             // パターン名が6文字を超えていたら、エラーにする
-            if (patternName.Length > 6)
+            if (TypeName.Length > 6)
             {
                 throw new ArgumentException("パターン名は6文字までです");
             }
 
             // パターン名は半角アルファベット大文字と数字とする
-            if(!Regex.IsMatch(patternName, "^[A-Z0-9]*$"))
+            if(!Regex.IsMatch(TypeName, "^[A-Z0-9]*$"))
             {
                 throw new ArgumentException("大文字のアルファベット、数字の組み合わせで入力して下さい");
             }
 
-            Value = patternName;
+            Value = TypeName;
         }
 
         public override bool Equals(object obj)
@@ -38,7 +38,7 @@ namespace Domain.Material
             if (obj == null) return false;
             if (obj.GetType() != this.GetType()) return false;
 
-            if (this.Value.Equals(((TreadPattern)obj).Value))
+            if (this.Value.Equals(((ProductType)obj).Value))
                 return true;
 
             return false;

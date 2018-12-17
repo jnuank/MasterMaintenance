@@ -35,8 +35,8 @@
     <Compile Include="Material\Material.cs" />
     <Compile Include="Material\MaterialId.cs" />
     <Compile Include="Material\MaterialType.cs" />
-    <Compile Include="Material\TreadPattern.cs" />
-    <Compile Include="Material\Width.cs" />
+    <Compile Include="Material\ProductType.cs" />
+    <Compile Include="Material\Size.cs" />
     <Compile Include="Material\Consumption.cs" />
     <Compile Include="Material\MaterialA.cs" />
     <Compile Include="Material\MaterialB.cs" />
@@ -45,7 +45,7 @@
     <Compile Include="Material\MaterialService.cs" />
     <Compile Include="Material\Length.cs" />
     <Compile Include="Material\Weight.cs" />
-    <Compile Include="Material\TreadPatternAndWidth.cs" />
+    <Compile Include="Material\TypeAndSize.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Material\" />

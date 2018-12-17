@@ -4,11 +4,11 @@ namespace Domain.Material
     /// <summary>
     /// 幅オブジェクト
     /// </summary>
-    public class Width
+    public class Size
     {
         public float Value { get; }
 
-        public Width(float value)
+        public Size(float value)
         {
             if(value < 0.0 || value > 999.9)
             {
@@ -22,7 +22,7 @@ namespace Domain.Material
             if (obj == null) return false;
             if (obj.GetType() != this.GetType()) return false;
 
-            if (this.Value.Equals(((Width)obj).Value))
+            if (this.Value.Equals(((Size)obj).Value))
                 return true;
 
             return false;

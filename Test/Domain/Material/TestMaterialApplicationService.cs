@@ -36,24 +36,23 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, consumption, weight, length);
 
             var id2 = new MaterialId("00001111");
             var consumption2 = new Consumption(10.1f);
             var weight2 = new Weight(11.2f);
             var length2 = new Length(59.9f);
-            var material2 = new MaterialA(id2, consumption2, weight2, length2);
+            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
 
             var id3 = new MaterialId("11112222");
-            var pattern3 = new TreadPattern("M000");
-            var width3 = new Width(23.92f);
+            var pattern3 = new ProductType("M000");
+            var width3 = new Size(23.92f);
 
-            var ptnAndWidth3 = new TreadPatternAndWidth(pattern3, width3);
-
+            var ptnAndWidth3 = new TypeAndSize(pattern3, width3);
 
             var weight3 = new Weight(20.2f);
             var length3 = new Length(9.2f);
-            var material3 = new MaterialB(id3, ptnAndWidth3, weight3, length3);
+            var material3 = Material.CreateMaterialB(id3, ptnAndWidth3, weight3, length3);
 
             app.Save(material);
             app.Save(material2);
@@ -75,21 +74,21 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, consumption, weight, length);
 
             var id2 = new MaterialId("00001111");
             var consumption2 = new Consumption(10.1f);
             var weight2 = new Weight(11.2f);
             var length2 = new Length(59.9f);
-            var material2 = new MaterialA(id2, consumption2, weight2, length2);
+            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
 
             var id3 = new MaterialId("11112222");
-            var pattern3 = new TreadPattern("M000");
-            var width3 = new Width(23.92f);
-            var ptnWidth3 = new TreadPatternAndWidth(pattern3, width3);
+            var pattern3 = new ProductType("M000");
+            var width3 = new Size(23.92f);
+            var ptnWidth3 = new TypeAndSize(pattern3, width3);
             var weight3 = new Weight(20.2f);
             var length3 = new Length(9.2f);
-            var material3 = new MaterialB(id3, ptnWidth3, weight3, length3);
+            var material3 = Material.CreateMaterialB(id3, ptnWidth3, weight3, length3);
 
             app.Save(material);
             app.Save(material2);
@@ -104,13 +103,13 @@ namespace Test
         [Test()]
         public void パターンと幅の組み合わせがイコールになること()
         {
-            var pattern = new TreadPattern("M000");
-            var width = new Width(23.92f);
+            var pattern = new ProductType("M000");
+            var width = new Size(23.92f);
 
          
-            var ptnAndWidth = new TreadPatternAndWidth(pattern, width);
+            var ptnAndWidth = new TypeAndSize(pattern, width);
 
-            var ptnAndWidth2 = new TreadPatternAndWidth(pattern, width);
+            var ptnAndWidth2 = new TypeAndSize(pattern, width);
 
             Assert.IsTrue(ptnAndWidth.Equals(ptnAndWidth2));
 
@@ -119,16 +118,16 @@ namespace Test
         [Test()]
         public void パターンと幅の組み合わせが一致しないこと()
         {
-            var pattern = new TreadPattern("M000");
-            var width = new Width(23.92f);
+            var pattern = new ProductType("M000");
+            var width = new Size(23.92f);
 
-            var pattern2 = new TreadPattern("R981");
-            var width2 = new Width(12.2f);
+            var pattern2 = new ProductType("R981");
+            var width2 = new Size(12.2f);
 
-            var ptnAndWidth = new TreadPatternAndWidth(pattern, width);
-            var ptnAndWidth2 = new TreadPatternAndWidth(pattern, width2);
-            var ptnAndWidth3 = new TreadPatternAndWidth(pattern2, width);
-            var ptnAndWidth4 = new TreadPatternAndWidth(pattern2, width2);
+            var ptnAndWidth = new TypeAndSize(pattern, width);
+            var ptnAndWidth2 = new TypeAndSize(pattern, width2);
+            var ptnAndWidth3 = new TypeAndSize(pattern2, width);
+            var ptnAndWidth4 = new TypeAndSize(pattern2, width2);
 
             Assert.IsFalse(ptnAndWidth.Equals(ptnAndWidth2));
             Assert.IsFalse(ptnAndWidth.Equals(ptnAndWidth3));
@@ -145,13 +144,13 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, consumption, weight, length);
 
             var id2 = new MaterialId("12345678");
             var consumption2 = new Consumption(10.1f);
             var weight2 = new Weight(11.2f);
             var length2 = new Length(59.9f);
-            var material2 = new MaterialA(id2, consumption2, weight2, length2);
+            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
 
             app.Save(material);
 
@@ -168,24 +167,24 @@ namespace Test
             var app = new MaterialApplicationService(repository);
 
             var id = new MaterialId("01010101");
-            var ptnWidth = new TreadPatternAndWidth(new TreadPattern("M000"), new Width(23.92f));
+            var ptnWidth = new TypeAndSize(new ProductType("M000"), new Size(23.92f));
             var weight = new Weight(20.2f);
             var length = new Length(9.2f);
-            var material = new MaterialB(id, ptnWidth, weight, length);
+            var material = Material.CreateMaterialB(id, ptnWidth, weight, length);
 
             var id2 = new MaterialId("25478900");
-            var ptnWidth2 = new TreadPatternAndWidth(new TreadPattern("M000"), new Width(23.92f));
+            var ptnWidth2 = new TypeAndSize(new ProductType("M000"), new Size(23.92f));
             var weight2 = new Weight(12.2f);
             var length2 = new Length(8.2f);
-            var material2 = new MaterialB(id2, ptnWidth2, weight2, length2);
+            var material2 = Material.CreateMaterialB(id2, ptnWidth2, weight2, length2);
 
             app.Save(material);
             app.Save(material2);
 
-            var ptn = new TreadPattern("M000");
-            var wid = new Width(23.92f);
+            var ptn = new ProductType("M000");
+            var wid = new Size(23.92f);
 
-            bool result = service.IsOverWidthAndPattern(new TreadPatternAndWidth(ptn ,wid));
+            bool result = service.IsOverWidthAndPattern(new TypeAndSize(ptn ,wid));
 
             Assert.IsTrue(result);
         }
@@ -200,13 +199,13 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, consumption, weight, length);
 
             var id2 = new MaterialId("00001111");
             var consumption2 = new Consumption(10.1f);
             var weight2 = new Weight(11.2f);
             var length2 = new Length(59.9f);
-            var material2 = new MaterialA(id2, consumption2, weight2, length2);
+            var material2 = Material.CreateMaterialA(id2, consumption2, weight2, length2);
 
             app.Save(material);
             app.Save(material2);

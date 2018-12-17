@@ -7,7 +7,7 @@ namespace Domain.Material
     {
         Material Find(MaterialId id);
         List<Material> Find(MaterialType type);
-        List<Material> Find(TreadPatternAndWidth ptnAndWidth);
+        List<Material> Find(TypeAndSize ptnAndWidth);
         List<Material> FindAll();
         void Save(Material target);
     }

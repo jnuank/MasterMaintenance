@@ -27,9 +27,9 @@ namespace Infrastructure
             return dataStore.Values.Where(x => x.Type == type).ToList();
         }
 
-        public List<Material> Find(TreadPatternAndWidth ptnAndWidth)
+        public List<Material> Find(TypeAndSize ptnAndWidth)
         {
-            return dataStore.Values.Where(x => x.PatternAndWidth.Equals(ptnAndWidth)).ToList();
+            return dataStore.Values.Where(x => x.TypeAndSize.Equals(ptnAndWidth)).ToList();
         }
 
         public List<Material> FindAll()

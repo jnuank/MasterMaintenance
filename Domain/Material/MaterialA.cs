@@ -7,7 +7,7 @@ namespace Domain.Material
                          Consumption consumption,
                          Weight weight,
                          Length length,
-                         TreadPatternAndWidth ptnWidth=null) 
+                         TypeAndSize ptnWidth=null) 
                          : base(id, MaterialType.A, ptnWidth, consumption, length, weight)
         {
             

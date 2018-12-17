@@ -24,7 +24,7 @@ namespace Test
         [ExpectedException(typeof(ArgumentException))]
         public void アルファベット大文字と数字のみであること()
         {
-            var pattern = new TreadPattern("M01あ");
+            var pattern = new ProductType("M01あ");
         }
     }
 }

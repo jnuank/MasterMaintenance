@@ -8,21 +8,26 @@ namespace Domain.Material
     {
         public MaterialId Id { get; protected set; }
         public MaterialType Type { get; protected set; }
-        public TreadPatternAndWidth PatternAndWidth { get; protected set; }
+        public TypeAndSize TypeAndSize { get; protected set; }
         public Consumption Consumption { get; protected set; }
         public Length Length { get; protected set; }
         public Weight Weight { get; protected set; }
 
         public Material(MaterialId id,
                         MaterialType type,
-                        TreadPatternAndWidth ptnWidth,
+                        TypeAndSize typesize,
                         Consumption consumption,
                         Length length,
                         Weight weight)
         {
+            if (id == null) throw new ArgumentNullException(nameof(MaterialId));
+            if (type == null) throw new ArgumentNullException(nameof(MaterialType));
+            if (length == null) throw new ArgumentNullException(nameof(Length));
+            if (weight == null) throw new ArgumentNullException(nameof(Weight));
+
             this.Id = id;
             this.Type = type;
-            this.PatternAndWidth = ptnWidth;
+            this.TypeAndSize = typesize;
             this.Consumption = consumption;
             this.Length = length;
             this.Weight = weight;
@@ -33,17 +38,28 @@ namespace Domain.Material
                                                Weight weight,
                                                Length length)
         {
-            return new Material(id, MaterialType.A, null, consumption, length, weight);
+            return new Material(id, MaterialType.A, null, null, length, weight);
         }
 
-        public void ChangePattern(TreadPattern pattern)
+        public static Material CreateMaterialB(MaterialId id,
+                                               TypeAndSize typesize,
+                                               Weight weight,
+                                               Length length,
+                                               Consumption consumption=null)
         {
-            this.PatternAndWidth = new TreadPatternAndWidth(pattern, this.PatternAndWidth.Width);
+            if(typesize == null) throw new ArgumentNullException(nameof(Domain.Material.TypeAndSize));
+
+            return new Material(id, MaterialType.B, typesize, consumption, length, weight);
         }
 
-        public void ChangeWidth(Width width)
+        public void ChangePattern(ProductType type)
         {
-            this.PatternAndWidth = new TreadPatternAndWidth(this.PatternAndWidth.Pattern, width);
+            this.TypeAndSize = new TypeAndSize(type, this.TypeAndSize.Width);
+        }
+
+        public void ChangeWidth(Size size)
+        {
+            this.TypeAndSize = new TypeAndSize(this.TypeAndSize.Type, size);
         }
 
         public void ChangeConsumption(Consumption consumption)

@@ -4,7 +4,7 @@ namespace Domain.Material
     public class MaterialB : Material
     {
         public MaterialB(MaterialId id, 
-                         TreadPatternAndWidth ptnWidth,
+                         TypeAndSize ptnWidth,
                          Weight weight,
                          Length length, 
                          Consumption consumption=null) 

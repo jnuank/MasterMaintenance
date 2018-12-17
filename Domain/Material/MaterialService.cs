@@ -28,7 +28,7 @@ namespace Domain.Material
             return materials.Count >= 2;
         }
 
-        public bool IsOverWidthAndPattern(TreadPatternAndWidth ptnAndWidth)
+        public bool IsOverWidthAndPattern(TypeAndSize ptnAndWidth)
         {
             var materials = repository.Find(ptnAndWidth);
 
