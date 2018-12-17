@@ -13,7 +13,7 @@ namespace Domain.Material
         public Length Length { get; private set; }
         public Weight Weight { get; private set; }
 
-        public Material(MaterialId id,
+        private Material(MaterialId id,
                         MaterialType type,
                         TypeAndSize typesize,
                         Consumption consumption,
