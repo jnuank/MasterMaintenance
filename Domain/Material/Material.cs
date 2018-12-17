@@ -61,6 +61,19 @@ namespace Domain.Material
             return new Material(id, name, MaterialType.B, typesize, consumption, length, weight);
         }
 
+
+        public Material ChangeType(MaterialType type)
+        {
+            if (type == MaterialType.A)
+                return CreateMaterialA(Id, Name, Consumption, Weight, Length);
+
+            if (type == MaterialType.B)
+                return CreateMaterialB(Id, Name, TypeAndSize, Weight, Length, Consumption);
+
+            return this;
+        }
+
+
         public void ChangeType(ProductType type)
         {
             this.TypeAndSize = new TypeAndSize(type, this.TypeAndSize.Width);

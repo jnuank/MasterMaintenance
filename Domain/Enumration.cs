@@ -46,6 +46,11 @@ namespace Domain
         }
 
         public int CompareTo(object other) => Id.CompareTo(((Enumeration)other).Id);
+
+        public override int GetHashCode()
+        {
+            return 2108858624 + Id.GetHashCode();
+        }
     }
 
 }

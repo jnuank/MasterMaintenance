@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using Domain.Material;
+using Domain;
 using Infrastructure;
 using System.Collections.Generic;
 
@@ -24,7 +25,6 @@ namespace Test
             var material = Material.CreateMaterialA(id, name, consumption, weight, length);
 
             app.Save(material);
-
 
             var id2 = new MaterialId("00001111");
             var name2 = new MaterialName("mate2");

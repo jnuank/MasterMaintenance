@@ -31,7 +31,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
     <Compile Include="Domain\Material\TestMaterialApplicationService.cs" />
   </ItemGroup>
   <ItemGroup>
