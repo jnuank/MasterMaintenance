@@ -32,6 +32,11 @@ namespace Infrastructure
             return dataStore.Values.Where(x => x.PatternAndWidth.Equals(ptnAndWidth)).ToList();
         }
 
+        public List<Material> FindAll()
+        {
+            return dataStore.Values.ToList();
+        }
+
         public void Save(Material target)
         {
             dataStore[target.Id] = target;
