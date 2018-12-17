@@ -6,12 +6,12 @@ namespace Domain.Material
     /// </summary>
     public class Material
     {
-        public MaterialId Id { get; protected set; }
-        public MaterialType Type { get; protected set; }
-        public TypeAndSize TypeAndSize { get; protected set; }
-        public Consumption Consumption { get; protected set; }
-        public Length Length { get; protected set; }
-        public Weight Weight { get; protected set; }
+        public MaterialId Id { get; private set; }
+        public MaterialType Type { get; private set; }
+        public TypeAndSize TypeAndSize { get; private set; }
+        public Consumption Consumption { get; private set; }
+        public Length Length { get; private set; }
+        public Weight Weight { get; private set; }
 
         public Material(MaterialId id,
                         MaterialType type,
