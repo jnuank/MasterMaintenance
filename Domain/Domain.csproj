@@ -38,8 +38,6 @@
     <Compile Include="Material\ProductType.cs" />
     <Compile Include="Material\Size.cs" />
     <Compile Include="Material\Consumption.cs" />
-    <Compile Include="Material\MaterialA.cs" />
-    <Compile Include="Material\MaterialB.cs" />
     <Compile Include="Material\IMaterialRepository.cs" />
     <Compile Include="Material\MaterialApplicationService.cs" />
     <Compile Include="Material\MaterialService.cs" />
