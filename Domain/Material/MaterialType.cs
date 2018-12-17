@@ -6,22 +6,22 @@ namespace Domain.Material
     /// </summary>
     public abstract class MaterialType : Enumeration
     {
-        public static MaterialType a = new A();
-        public static MaterialType b = new B();
+        public static MaterialType A = new MaterialTypeA();
+        public static MaterialType B = new MaterialTypeB();
 
         protected MaterialType(int id, string name) : base(id, name)
         {
             // do nothing
         }
 
-        private class A : MaterialType
+        private class MaterialTypeA : MaterialType
         {
-            public A() : base(0, "A") { }
+            public MaterialTypeA() : base(0, "A") { }
         }
 
-        private class B : MaterialType
+        private class MaterialTypeB : MaterialType
         {
-            public B() : base(1, "B") { }
+            public MaterialTypeB() : base(1, "B") { }
         }
     }
 
