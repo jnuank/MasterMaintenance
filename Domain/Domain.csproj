@@ -45,6 +45,8 @@
     <Compile Include="Material\Weight.cs" />
     <Compile Include="Material\TypeAndSize.cs" />
     <Compile Include="Material\MaterialName.cs" />
+    <Compile Include="Material\MaterialA.cs" />
+    <Compile Include="Material\MaterialB.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Material\" />

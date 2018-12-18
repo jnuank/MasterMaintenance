@@ -4,7 +4,7 @@ namespace Domain.Material
     /// <summary>
     /// 部材クラス
     /// </summary>
-    public class Material
+    public abstract class Material
     {
         public MaterialId Id { get; private set; }
         public MaterialName Name { get; private set; }
@@ -15,7 +15,7 @@ namespace Domain.Material
         public Weight Weight { get; private set; }
 
         // コンストラクタはprivateにしておき、外部からインスタンス化させない
-        private Material(MaterialId id,
+        protected Material(MaterialId id,
                         MaterialName name,
                         MaterialType type,
                         TypeAndSize typesize,
@@ -23,81 +23,72 @@ namespace Domain.Material
                         Length length,
                         Weight weight)
         {
-            if (id == null) throw new ArgumentNullException(nameof(MaterialId));
-            if (name == null) throw new ArgumentNullException(nameof(MaterialName));
-            if (type == null) throw new ArgumentNullException(nameof(MaterialType));
-            if (length == null) throw new ArgumentNullException(nameof(Length));
-            if (weight == null) throw new ArgumentNullException(nameof(Weight));
+            if (id == null) throw new ArgumentException(nameof(MaterialId));
+            if (type == null) throw new ArgumentException(nameof(MaterialType));
+            if (!ValidateName(name)) throw new ArgumentException(nameof(MaterialName));
+            if (!ValidateLength(length)) throw new ArgumentException(nameof(Length));
+            if (!ValidateWeight(weight)) throw new ArgumentException(nameof(Weight));
+            if (!ValidateTypeAndSize(typesize)) throw new ArgumentException(nameof(typesize));
+            if (!ValidateConsumption(consumption)) throw new ArgumentException(nameof(consumption));
 
             this.Id = id;
-            this.Name = name;
             this.Type = type;
-            this.TypeAndSize = typesize;
-            this.Consumption = consumption;
+            this.Name = name;
             this.Length = length;
             this.Weight = weight;
-        }
-
-        // 部材Aを生成する
-        public static Material CreateMaterialA(MaterialId id,
-                                               MaterialName name,
-                                               Consumption consumption,
-                                               Weight weight,
-                                               Length length)
-        {
-            return new Material(id, name, MaterialType.A, null, null, length, weight);
-        }
-
-        // 部材Bを生成する
-        public static Material CreateMaterialB(MaterialId id,
-                                               MaterialName name,
-                                               TypeAndSize typesize,
-                                               Weight weight,
-                                               Length length,
-                                               Consumption consumption=null)
-        {
-            if(typesize == null) throw new ArgumentNullException(nameof(Domain.Material.TypeAndSize));
-
-            return new Material(id, name, MaterialType.B, typesize, consumption, length, weight);
+            this.TypeAndSize = typesize;
+            this.Consumption = consumption;
         }
 
 
-        public Material ChangeType(MaterialType type)
-        {
-            if (type == MaterialType.A)
-                return CreateMaterialA(Id, Name, Consumption, Weight, Length);
-
-            if (type == MaterialType.B)
-                return CreateMaterialB(Id, Name, TypeAndSize, Weight, Length, Consumption);
-
-            return this;
-        }
+        // バリデーション関数
+        public abstract bool ValidateName(MaterialName value);
+        public abstract bool ValidateTypeAndSize(TypeAndSize value);
+        public abstract bool ValidateConsumption(Consumption value);
+        public abstract bool ValidateWeight(Weight value);
+        public abstract bool ValidateLength(Length value);
 
 
         public void ChangeType(ProductType type)
         {
-            this.TypeAndSize = new TypeAndSize(type, this.TypeAndSize.Width);
+            var value = new TypeAndSize(type, this.TypeAndSize.Width);
+            if (!ValidateTypeAndSize(value))
+                throw new ArgumentException(nameof(type)+"の値が不正です");
+
+            this.TypeAndSize = value;
         }
 
-        public void ChangeWidth(Size size)
+        public void ChangeSize(Size size)
         {
-            this.TypeAndSize = new TypeAndSize(this.TypeAndSize.Type, size);
+            var value = new TypeAndSize(this.TypeAndSize.Type, size);
+            if(!ValidateTypeAndSize(value))
+                throw new ArgumentException(nameof(size) + "の値が不正です");
+
+            this.TypeAndSize = value;
         }
 
         public void ChangeConsumption(Consumption consumption)
         {
+            if (!ValidateConsumption(consumption))
+                throw new ArgumentException(nameof(consumption) + "の値が不正です");
+
             this.Consumption = consumption;
         }
 
         public void ChangWeight(Weight weight)
         {
+            if (!ValidateWeight(weight))
+                throw new ArgumentException(nameof(weight) + "の値が不正です");
+
             this.Weight = weight;
         }
 
         public void ChangeLength(Length length)
         {
+            if (!ValidateLength(length))
+                throw new ArgumentException(nameof(length) + "の値が不正です");
+
             this.Length = length;
         }
-
     }
 }
