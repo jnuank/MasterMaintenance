@@ -40,7 +40,6 @@ namespace Domain.Material
             this.Consumption = consumption;
         }
 
-
         // バリデーション関数
         public abstract bool ValidateName(MaterialName value);
         public abstract bool ValidateTypeAndSize(TypeAndSize value);
