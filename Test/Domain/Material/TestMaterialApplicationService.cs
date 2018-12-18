@@ -193,7 +193,7 @@ namespace Test
             var service = new MaterialService(repository);
 
 
-            bool result = service.IsOverMaterialA();
+            bool result = service.IsOverAddedMaterialA();
 
             Assert.IsTrue(result);
         }
