@@ -48,7 +48,6 @@ namespace Domain.Material
         public abstract bool ValidateWeight(Weight value);
         public abstract bool ValidateLength(Length value);
 
-
         public void ChangeType(ProductType type)
         {
             var value = new TypeAndSize(type, this.TypeAndSize.Width);
@@ -73,6 +72,14 @@ namespace Domain.Material
                 throw new ArgumentException(nameof(consumption) + "の値が不正です");
 
             this.Consumption = consumption;
+        }
+
+        public void ChangeName(MaterialName name)
+        {
+            if(!ValidateName(name))
+                throw new ArgumentException(nameof(name) + "の値が不正です");
+
+            this.Name = name;
         }
 
         public void ChangWeight(Weight weight)

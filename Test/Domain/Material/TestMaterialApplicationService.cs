@@ -197,6 +197,35 @@ namespace Test
 
             Assert.IsTrue(result);
         }
+
+        [Test()]
+        public void 部材の名称を変更する()
+        {
+            var app = new MaterialApplicationService(repository);
+            var material = app.Find("12345678");
+
+            // 変更前
+            Assert.AreEqual("mat1", material.Name.Value);
+
+            var name = new MaterialName("BUZAI1");
+            material.ChangeName(name);
+            app.Save(material);
+
+            // 変更後
+            Assert.AreEqual("BUZAI1", app.Find("12345678").Name.Value);
+        }
+
+        [Test()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void 消費量を変更する時にnullを渡してエラーする()
+        {
+            var app = new MaterialApplicationService(repository);
+            var material = app.Find("12345678");
+            
+            material.ChangeConsumption(null);
+
+            app.Save(material);
+        }
     }
 
 }
