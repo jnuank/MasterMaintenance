@@ -41,8 +41,6 @@ namespace Test
             {
                 app.Save("56789011", "mat5", 0, null, null, 55.591f, 40.1f, 30.0f);
             });
-
-           
         }
 
         [Fact()]
