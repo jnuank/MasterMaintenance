@@ -47,6 +47,7 @@
     <Compile Include="Material\MaterialName.cs" />
     <Compile Include="Material\MaterialA.cs" />
     <Compile Include="Material\MaterialB.cs" />
+    <Compile Include="Material\IMaterilValidatePolicy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Material\" />
