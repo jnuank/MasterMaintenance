@@ -43,7 +43,6 @@ namespace Test
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual("12345678", result[0].Id.Value);
             Assert.AreEqual("00001111", result[1].Id.Value);
-
         }
 
         [Test()]
