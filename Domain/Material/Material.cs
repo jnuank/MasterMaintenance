@@ -15,7 +15,7 @@ namespace Domain.Material
         public Weight Weight { get; private set; }
 
         // コンストラクタはprivateにしておき、外部からインスタンス化させない
-        private Material(MaterialId id,
+        public Material(MaterialId id,
                         MaterialName name,
                         MaterialType type,
                         TypeAndSize typesize,
@@ -85,7 +85,7 @@ namespace Domain.Material
 
         public void ChangeType(ProductType type)
         {
-            var value = new TypeAndSize(type, this.TypeAndSize.Width);
+            var value = new TypeAndSize(type, this.TypeAndSize.Size);
             if (!Type.ValidateTypeAndSize(value))
                 throw new ArgumentException(nameof(type)+"の値が不正です");
 

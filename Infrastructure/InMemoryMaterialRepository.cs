@@ -41,5 +41,11 @@ namespace Infrastructure
         {
             dataStore[target.Id] = target;
         }
+
+        public void Delete(MaterialId id)
+        {
+            dataStore.Remove(id);
+        }
+
     }
 }

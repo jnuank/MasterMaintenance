@@ -6,11 +6,17 @@ namespace Domain.Material
     /// </summary>
     public class Size
     {
-        public float Value { get; }
+        public float? Value { get; }
 
-        public Size(float value)
+        public Size(float? value)
         {
-            if(value < 0.0 || value > 999.9)
+            if(value==null)
+            {
+                Value = null;
+                return;
+            }
+
+            if (value < 0.0 || value > 999.9)
             {
                 throw new ArgumentException("0.0から999.9の間で入力して下さい");
             }

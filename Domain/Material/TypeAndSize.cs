@@ -6,12 +6,12 @@ namespace Domain.Material
     public class TypeAndSize
     {
         public ProductType Type { get; }
-        public Size Width { get; }
+        public Size Size { get; }
 
-        public TypeAndSize(ProductType type, Size width)
+        public TypeAndSize(ProductType type, Size size)
         {
             this.Type = type;
-            this.Width = width;
+            this.Size = size;
         }
 
         public override bool Equals(object obj)
@@ -24,14 +24,14 @@ namespace Domain.Material
 
             var other = obj as TypeAndSize;
 
-            return this.Type.Equals(other.Type) && this.Width.Equals(other.Width);            
+            return this.Type.Equals(other.Type) && this.Size.Equals(other.Size);            
         }
 
         public override int GetHashCode()
         {
             var hashCode = 102817008;
             hashCode = hashCode * -1521134295 + EqualityComparer<ProductType>.Default.GetHashCode(Type);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Size>.Default.GetHashCode(Width);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Size>.Default.GetHashCode(Size);
             return hashCode;
         }
     }
