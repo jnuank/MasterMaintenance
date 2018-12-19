@@ -22,7 +22,7 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, name, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, name, consumption, weight, length);
 
             app.Save(material);
 
@@ -31,7 +31,7 @@ namespace Test
             var consumption2 = new Consumption(10.1f);
             var weight2 = new Weight(11.2f);
             var length2 = new Length(59.9f);
-            var material2 = new MaterialA(id2, name2, consumption2, weight2, length2);
+            var material2 = Material.CreateMaterialA(id2, name2, consumption2, weight2, length2);
 
             app.Save(material2);
 
@@ -45,7 +45,7 @@ namespace Test
 
             var weight3 = new Weight(20.2f);
             var length3 = new Length(9.2f);
-            var material3 = new MaterialB(id3, name3, ptnAndWidth3, weight3, length3);
+            var material3 = Material.CreateMaterialB(id3, name3, ptnAndWidth3, weight3, length3);
 
             app.Save(material3);
 
@@ -61,7 +61,7 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, name, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, name, consumption, weight, length);
 
             app.Save(material);
 
@@ -138,14 +138,14 @@ namespace Test
             var consumption = new Consumption(55.591f);
             var weight = new Weight(30.0f);
             var length = new Length(40.1f);
-            var material = new MaterialA(id, name, consumption, weight, length);
+            var material = Material.CreateMaterialA(id, name, consumption, weight, length);
 
             var id2 = new MaterialId("12345678");
             var name2 = new MaterialName("m2");
             var consumption2 = new Consumption(10.1f);
             var weight2 = new Weight(11.2f);
             var length2 = new Length(59.9f);
-            var material2 = new MaterialA(id2, name2, consumption2, weight2, length2);
+            var material2 = Material.CreateMaterialA(id2, name2, consumption2, weight2, length2);
 
             app.Save(material);
 
@@ -166,14 +166,14 @@ namespace Test
             var ptnWidth = new TypeAndSize(new ProductType("M000"), new Size(23.92f));
             var weight = new Weight(20.2f);
             var length = new Length(9.2f);
-            var material = new MaterialB(id, name, ptnWidth, weight, length);
+            var material = Material.CreateMaterialB(id, name, ptnWidth, weight, length);
 
             var id2 = new MaterialId("25478900");
             var name2 = new MaterialName("m2");
             var ptnWidth2 = new TypeAndSize(new ProductType("M000"), new Size(23.92f));
             var weight2 = new Weight(12.2f);
             var length2 = new Length(8.2f);
-            var material2 = new MaterialB(id2, name2, ptnWidth2, weight2, length2);
+            var material2 = Material.CreateMaterialB(id2, name2, ptnWidth2, weight2, length2);
 
             app.Save(material);
             app.Save(material2);
