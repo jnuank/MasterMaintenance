@@ -17,7 +17,6 @@ namespace Test
             var app = new MaterialApplicationService(repository);
 
             app.Save("12345678", "mat1", 0, null, null, 55.591f, 40.1f, 30.0f);
-            app.Save("00001111", "mate2", 0, null, null, 10.1f, 59.9f, 11.2f);
             app.Save("11112222", "mate3", 1, "M040", 23.92f, null, 9.2f, 20.0f);
         }
 
@@ -32,6 +31,21 @@ namespace Test
         }
 
         [Fact()]
+        public void 部材Aを2件以上登録しようとしたらエラーとなる()
+        {
+            var app = new MaterialApplicationService(repository);
+
+            app.Save("19878768", "mat4", 0, null, 0.0f, 55.591f, 40.1f, 30.0f);
+
+            Assert.Throws<Exception>(() =>
+            {
+                app.Save("56789011", "mat5", 0, null, null, 55.591f, 40.1f, 30.0f);
+            });
+
+           
+        }
+
+        [Fact()]
         public void 部材区分Aをすべて取得する()
         {
             var app = new MaterialApplicationService(repository);
@@ -39,7 +53,6 @@ namespace Test
             List<Material> result = app.FindTypeA();
 
             Assert.Equal("12345678", result[0].Id.Value);
-            Assert.Equal("00001111", result[1].Id.Value);
         }
 
         [Fact()]
@@ -55,7 +68,6 @@ namespace Test
         [Fact()]
         public void Idが重複していたらExceptionを返す()
         {
-            var service = new MaterialService(repository);
             var app = new MaterialApplicationService(repository);
 
             Assert.Throws<Exception>(() =>
@@ -67,29 +79,15 @@ namespace Test
         [Fact()]
         public void パターンと幅が2つ以上重複していたらTrueを返す()
         {
-            var service = new MaterialService(repository);
             var app = new MaterialApplicationService(repository);
 
             app.Save("01010101", "m1", 1, "M000", 23.92f, null, 9.2f, 20.2f);
             app.Save("25478900", "m2", 1, "M000", 23.92f, null, 8.2f, 12.2f);
 
-            var ptn = new ProductType("M000");
-            var wid = new Size(23.92f);
-
-            bool result = service.IsOverAddedTypeAndSize(new TypeAndSize(ptn ,wid));
-
-            Assert.True(result);
-        }
-
-        [Fact()]
-        public void 部材Aが2つ以上あったらTrueを返す()
-        {
-            var app = new MaterialApplicationService(repository);
-            var service = new MaterialService(repository);
-
-            bool result = service.IsOverAddedMaterialA();
-
-            Assert.True(result);
+            Assert.Throws<Exception>(() =>
+            {
+                app.Save("25478900", "m2", 1, "M000", 23.92f, null, 8.2f, 12.2f);
+            });
         }
 
         [Fact()]
