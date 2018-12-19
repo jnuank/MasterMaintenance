@@ -12,16 +12,6 @@ namespace Domain.Material
             this.repository = repository;
         }
 
-        public void Modify(Material target)
-        {
-            var service = new MaterialService(repository);
-            if (!service.IsDuplicatedId(target.Id))
-            {
-                throw new Exception("IDが存在しません");
-            }
-            repository.Save(target);
-        }
-
         public Material Find(string id)
         {
             var Id = new MaterialId(id);

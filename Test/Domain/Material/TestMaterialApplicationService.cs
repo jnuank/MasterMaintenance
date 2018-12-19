@@ -106,7 +106,14 @@ namespace Test
 
             var name = new MaterialName("BUZAI1");
             material.ChangeName(name);
-            app.Modify(material);
+            app.Modify(material.Id.Value,
+                   "BUZAI1",
+                   material.Type.Id,
+                   material.TypeAndSize.Type.Value,
+                   material.TypeAndSize.Size.Value,
+                   material.Consumption.Value,
+                   material.Length.Value,
+                   material.Weight.Value);
 
             // 変更後
             Assert.AreEqual("BUZAI1", app.Find("12345678").Name.Value);
