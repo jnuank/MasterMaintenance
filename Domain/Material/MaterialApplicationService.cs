@@ -52,13 +52,27 @@ namespace Domain.Material
             var Length = new Length(length);
             var Weight = new Weight(weight);
 
+            // 値個別のバリデーションは、エンティティを生成する時に行う
             var target = new Material(Id, Name, Type, TypeAndSize, Consumption, Length, Weight);
 
             var service = new MaterialService(repository);
+
             if (service.IsDuplicatedId(target.Id))
             {
                 throw new Exception("IDが重複しています");
             }
+
+            if(Type.Id == MaterialType.A.Id && service.IsOverAddedMaterialA())
+            {
+                throw new Exception("部材区分Aが2件登録されています"); 
+            }
+
+            if(Type.Id == MaterialType.B.Id && service.IsOverAddedTypeAndSize(TypeAndSize))
+            {
+                throw new Exception(nameof(TypeAndSize.Type.Value) + "と" +
+                                    nameof(TypeAndSize.Size.Value) + "の組み合わせは2件登録されています");
+            }
+
             repository.Save(target);
         }
 
@@ -88,6 +102,18 @@ namespace Domain.Material
             {
                 throw new Exception("IDが存在しません");
             }
+
+            if (Type.Id == MaterialType.A.Id && service.IsOverAddedMaterialA())
+            {
+                throw new Exception("部材区分Aが2件登録されています");
+            }
+
+            if (Type.Id == MaterialType.B.Id && service.IsOverAddedTypeAndSize(TypeAndSize))
+            {
+                throw new Exception(nameof(TypeAndSize.Type.Value) + "と" +
+                                    nameof(TypeAndSize.Size.Value) + "の組み合わせは2件登録されています");
+            }
+
             repository.Save(target);
         }
     }
