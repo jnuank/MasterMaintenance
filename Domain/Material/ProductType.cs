@@ -11,26 +11,26 @@ namespace Domain.Material
     {
         public string Value { get; }
 
-        public ProductType(string TypeName)
+        public ProductType(string value)
         {
-            if(string.IsNullOrEmpty(TypeName))
+            if (value == null)
             {
-                throw new ArgumentException("空白を入れることはできません");
+                Value = null;
+                return;
             }
-
             // パターン名が6文字を超えていたら、エラーにする
-            if (TypeName.Length > 6)
+            if (value.Length > 6)
             {
                 throw new ArgumentException("パターン名は6文字までです");
             }
 
             // パターン名は半角アルファベット大文字と数字とする
-            if(!Regex.IsMatch(TypeName, "^[A-Z0-9]*$"))
+            if(!Regex.IsMatch(value, "^[A-Z0-9]*$"))
             {
                 throw new ArgumentException("大文字のアルファベット、数字の組み合わせで入力して下さい");
             }
 
-            Value = TypeName;
+            Value = value;
         }
 
         public override bool Equals(object obj)

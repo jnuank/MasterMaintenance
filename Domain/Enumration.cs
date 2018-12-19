@@ -51,6 +51,8 @@ namespace Domain
         {
             return 2108858624 + Id.GetHashCode();
         }
+
+        
     }
 
 }

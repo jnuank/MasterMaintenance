@@ -15,7 +15,7 @@ namespace Domain.Material
         public Weight Weight { get; private set; }
 
         // コンストラクタはprivateにしておき、外部からインスタンス化させない
-        private Material(MaterialId id,
+        public Material(MaterialId id,
                         MaterialName name,
                         MaterialType type,
                         TypeAndSize typesize,
@@ -23,81 +23,114 @@ namespace Domain.Material
                         Length length,
                         Weight weight)
         {
-            if (id == null) throw new ArgumentNullException(nameof(MaterialId));
-            if (name == null) throw new ArgumentNullException(nameof(MaterialName));
-            if (type == null) throw new ArgumentNullException(nameof(MaterialType));
-            if (length == null) throw new ArgumentNullException(nameof(Length));
-            if (weight == null) throw new ArgumentNullException(nameof(Weight));
+            // 先にMaterialTypeがnullで無いことをチェックしないと、
+            // 後続のValidationが出来なくなる。(Typeがnullなので、nullReferenceErrorとかになるはず)
+            if (id == null) throw new ArgumentException(nameof(MaterialId));
+            if (type == null) throw new ArgumentException(nameof(MaterialType));
 
             this.Id = id;
-            this.Name = name;
             this.Type = type;
-            this.TypeAndSize = typesize;
-            this.Consumption = consumption;
+
+            if (!Type.ValidateName(name)) throw new ArgumentException(nameof(name));
+            if (!Type.ValidateLength(length)) throw new ArgumentException(nameof(Length));
+            if (!Type.ValidateWeight(weight)) throw new ArgumentException(nameof(Weight));
+            if (!Type.ValidateTypeAndSize(typesize)) throw new ArgumentException(nameof(typesize));
+            if (!Type.ValidateConsumption(consumption)) throw new ArgumentException(nameof(consumption));
+
+            this.Name = name;
             this.Length = length;
             this.Weight = weight;
+            this.TypeAndSize = typesize;
+            this.Consumption = consumption;
         }
 
-        // 部材Aを生成する
+
         public static Material CreateMaterialA(MaterialId id,
-                                               MaterialName name,
-                                               Consumption consumption,
-                                               Weight weight,
-                                               Length length)
+                                             MaterialName name,
+                                             Consumption consumption,
+                                             Weight weight,
+                                             Length length)
         {
-            return new Material(id, name, MaterialType.A, null, null, length, weight);
+            return new Material(id, name, MaterialType.A, null, consumption, length, weight);
         }
 
-        // 部材Bを生成する
         public static Material CreateMaterialB(MaterialId id,
                                                MaterialName name,
                                                TypeAndSize typesize,
                                                Weight weight,
                                                Length length,
-                                               Consumption consumption=null)
+                                               Consumption consumption = null)
         {
-            if(typesize == null) throw new ArgumentNullException(nameof(Domain.Material.TypeAndSize));
-
             return new Material(id, name, MaterialType.B, typesize, consumption, length, weight);
         }
 
 
-        public Material ChangeType(MaterialType type)
+        // 各プロパティの変更メソッド。変更の中にバリデーションも含めてしまっているけど、
+        // これはどうなんだろうか。
+        public void ChangeMaterilType(MaterialType materialType)
         {
-            if (type == MaterialType.A)
-                return CreateMaterialA(Id, Name, Consumption, Weight, Length);
+            // 新しい部材区分に設定されているバリデーションルールに則って、
+            // いまのエンティティのプロパティのチェックをする
+            if(!materialType.ValidateName(this.Name)
+               && !materialType.ValidateLength(this.Length)
+               && !materialType.ValidateWeight(this.Weight)
+               && !materialType.ValidateTypeAndSize(this.TypeAndSize)
+               && !materialType.ValidateConsumption(this.Consumption))
+            {
+                throw new ArgumentException("値が不正です");
+            }
 
-            if (type == MaterialType.B)
-                return CreateMaterialB(Id, Name, TypeAndSize, Weight, Length, Consumption);
-
-            return this;
+            this.Type = materialType;
         }
-
 
         public void ChangeType(ProductType type)
         {
-            this.TypeAndSize = new TypeAndSize(type, this.TypeAndSize.Width);
+            var value = new TypeAndSize(type, this.TypeAndSize.Size);
+            if (!Type.ValidateTypeAndSize(value))
+                throw new ArgumentException(nameof(type)+"の値が不正です");
+
+            this.TypeAndSize = value;
         }
 
-        public void ChangeWidth(Size size)
+        public void ChangeSize(Size size)
         {
-            this.TypeAndSize = new TypeAndSize(this.TypeAndSize.Type, size);
+            var value = new TypeAndSize(this.TypeAndSize.Type, size);
+            if(!Type.ValidateTypeAndSize(value))
+                throw new ArgumentException(nameof(size) + "の値が不正です");
+
+            this.TypeAndSize = value;
         }
 
         public void ChangeConsumption(Consumption consumption)
         {
+            if (!Type.ValidateConsumption(consumption))
+                throw new ArgumentException(nameof(consumption) + "の値が不正です");
+
             this.Consumption = consumption;
+        }
+
+        public void ChangeName(MaterialName name)
+        {
+            if(!Type.ValidateName(name))
+                throw new ArgumentException(nameof(name) + "の値が不正です");
+
+            this.Name = name;
         }
 
         public void ChangWeight(Weight weight)
         {
+            if (!Type.ValidateWeight(weight))
+                throw new ArgumentException(nameof(weight) + "の値が不正です");
+
             this.Weight = weight;
         }
 
         public void ChangeLength(Length length)
         {
+            if (!Type.ValidateLength(length))
+                throw new ArgumentException(nameof(length) + "の値が不正です");
+
             this.Length = length;
         }
-
     }
 }

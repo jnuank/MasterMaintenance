@@ -10,5 +10,6 @@ namespace Domain.Material
         List<Material> Find(TypeAndSize ptnAndWidth);
         List<Material> FindAll();
         void Save(Material target);
+        void Delete(MaterialId id);
     }
 }
