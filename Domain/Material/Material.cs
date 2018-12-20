@@ -14,7 +14,6 @@ namespace Domain.Material
         public Length Length { get; private set; }
         public Weight Weight { get; private set; }
 
-        // コンストラクタはprivateにしておき、外部からインスタンス化させない
         public Material(MaterialId id,
                         MaterialName name,
                         MaterialType type,
