@@ -8,17 +8,13 @@ namespace Domain.Material
     /// </summary>
     public abstract class MaterialType : Enumeration
     {
+        // 部材区分オブジェクト
         public static MaterialType A = new MaterialTypeA();
         public static MaterialType B = new MaterialTypeB();
 
-        // 何かプロパティが必要なら、ここに記載しておくことができる。
-        
+        protected MaterialType(int id, string name) : base(id, name){ }
 
-        protected MaterialType(int id, string name) : base(id, name)
-        {
-            // do nothing
-        }
-
+        // バリデーションメソッドを抽象メソッドとして用意しておく
         public abstract bool ValidateConsumption(Consumption consumption);
         public abstract bool ValidateLength(Length length);
         public abstract bool ValidateName(MaterialName name);

@@ -44,27 +44,6 @@ namespace Domain.Material
             this.Consumption = consumption;
         }
 
-
-        public static Material CreateMaterialA(MaterialId id,
-                                             MaterialName name,
-                                             Consumption consumption,
-                                             Weight weight,
-                                             Length length)
-        {
-            return new Material(id, name, MaterialType.A, null, consumption, length, weight);
-        }
-
-        public static Material CreateMaterialB(MaterialId id,
-                                               MaterialName name,
-                                               TypeAndSize typesize,
-                                               Weight weight,
-                                               Length length,
-                                               Consumption consumption = null)
-        {
-            return new Material(id, name, MaterialType.B, typesize, consumption, length, weight);
-        }
-
-
         // 各プロパティの変更メソッド。変更の中にバリデーションも含めてしまっているけど、
         // これはどうなんだろうか。
         public void ChangeMaterilType(MaterialType materialType)

@@ -7,31 +7,31 @@ namespace Domain.Material
     /// <summary>
     /// トレッドパターンオブジェクト
     /// </summary>
-    public class ProductType
+public class ProductType
+{
+    public string Value { get; }
+
+    public ProductType(string value)
     {
-        public string Value { get; }
-
-        public ProductType(string value)
+        if (value == null)
         {
-            if (value == null)
-            {
-                Value = null;
-                return;
-            }
-            // パターン名が6文字を超えていたら、エラーにする
-            if (value.Length > 6)
-            {
-                throw new ArgumentException("パターン名は6文字までです");
-            }
-
-            // パターン名は半角アルファベット大文字と数字とする
-            if(!Regex.IsMatch(value, "^[A-Z0-9]*$"))
-            {
-                throw new ArgumentException("大文字のアルファベット、数字の組み合わせで入力して下さい");
-            }
-
-            Value = value;
+            Value = null;
+            return;
         }
+        // パターン名が6文字を超えていたら、エラーにする
+        if (value.Length > 6)
+        {
+            throw new ArgumentException("パターン名は6文字までです");
+        }
+
+        // パターン名は半角アルファベット大文字と数字とする
+        if(!Regex.IsMatch(value, "^[A-Z0-9]*$"))
+        {
+            throw new ArgumentException("大文字のアルファベット、数字の組み合わせで入力して下さい");
+        }
+
+        Value = value;
+    }
 
         public override bool Equals(object obj)
         {
