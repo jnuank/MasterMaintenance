@@ -24,7 +24,7 @@ namespace Domain.Material
 
             var other = obj as TypeAndSize;
 
-            return this.Type.Equals(other.Type) && this.Size.Equals(other.Size);            
+            return this.Type.Equals(other.Type.Value) && this.Size.Equals(other.Size.Value);            
         }
 
         public override int GetHashCode()

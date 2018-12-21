@@ -14,7 +14,6 @@ namespace Domain.Material
         public Length Length { get; private set; }
         public Weight Weight { get; private set; }
 
-        // コンストラクタはprivateにしておき、外部からインスタンス化させない
         public Material(MaterialId id,
                         MaterialName name,
                         MaterialType type,
@@ -43,27 +42,6 @@ namespace Domain.Material
             this.TypeAndSize = typesize;
             this.Consumption = consumption;
         }
-
-
-        public static Material CreateMaterialA(MaterialId id,
-                                             MaterialName name,
-                                             Consumption consumption,
-                                             Weight weight,
-                                             Length length)
-        {
-            return new Material(id, name, MaterialType.A, null, consumption, length, weight);
-        }
-
-        public static Material CreateMaterialB(MaterialId id,
-                                               MaterialName name,
-                                               TypeAndSize typesize,
-                                               Weight weight,
-                                               Length length,
-                                               Consumption consumption = null)
-        {
-            return new Material(id, name, MaterialType.B, typesize, consumption, length, weight);
-        }
-
 
         // 各プロパティの変更メソッド。変更の中にバリデーションも含めてしまっているけど、
         // これはどうなんだろうか。

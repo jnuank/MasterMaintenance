@@ -12,6 +12,8 @@ namespace Domain.Material
             this.repository = repository;
         }
 
+
+
         public Material Find(string id)
         {
             var Id = new MaterialId(id);

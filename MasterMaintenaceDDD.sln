@@ -1,8 +1,6 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{C5FC3A97-0BA5-41B5-B714-AD86045505BA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{233E241F-EEBC-4BD3-9DE8-48452C870D10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{8EF6944E-A5F1-4DF4-AFD9-CB042EF918F5}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5FC3A97-0BA5-41B5-B714-AD86045505BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5FC3A97-0BA5-41B5-B714-AD86045505BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5FC3A97-0BA5-41B5-B714-AD86045505BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5FC3A97-0BA5-41B5-B714-AD86045505BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{233E241F-EEBC-4BD3-9DE8-48452C870D10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{233E241F-EEBC-4BD3-9DE8-48452C870D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{233E241F-EEBC-4BD3-9DE8-48452C870D10}.Release|Any CPU.ActiveCfg = Release|Any CPU

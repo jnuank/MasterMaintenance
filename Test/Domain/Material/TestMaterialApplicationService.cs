@@ -17,7 +17,7 @@ namespace Test
             var app = new MaterialApplicationService(repository);
 
             app.Save("12345678", "mat1", 0, null, null, 55.591f, 40.1f, 30.0f);
-            app.Save("11112222", "mate3", 1, "M040", 23.92f, null, 9.2f, 20.0f);
+            app.Save("11112222", "mate3", 1, null, 23.92f, null, 9.2f, 20.0f);
         }
 
         [Fact()]
